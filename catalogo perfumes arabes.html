@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Catálogo de Perfumes Árabes</title>
+<style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2em;
+    }
+    .filtro {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .catalogo {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+    .producto {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .producto img {
+      width: 100px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 10px;
+    }
+    .producto h2 {
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+    .precio {
+      font-weight: bold;
+      color: #007b5e;
+    }
+  </style>
+<script>
+    function filtrarGenero(genero) {
+      const productos = document.querySelectorAll('.producto');
+      productos.forEach(producto => {
+        if (genero === 'todos' || producto.dataset.genero === genero) {
+          producto.style.display = 'block';
+        } else {
+          producto.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+<h1>💨 Perfumes Árabes 🐫 🇸🇦</h1>
+<p style="text-align:center; font-size:0.9em; color:#666;">(Los precios están expresados en dólares y el tipo de cambio tomado será del dólar blue)</p>
+<div class="filtro">
+<label for="genero">Filtrar por género:</label>
+<select id="genero" onchange="filtrarGenero(this.value)">
+<option value="todos">Todos</option>
+<option value="hombre">Hombre</option>
+<option value="mujer">Mujer</option>
+</select>
+</div>
+
+<div style="text-align:center; margin-bottom: 20px;">
+<label for="dolarInput">Ingrese el precio del dólar blue: </label>
+<input id="dolarInput" oninput="convertirPrecios()" placeholder="Ej. 1050" style="padding:5px;" type="number"/>
+</div>
+<script>
+function convertirPrecios() {
+  const tasa = parseFloat(document.getElementById('dolarInput').value);
+  if (isNaN(tasa)) return;
+  const precios = document.querySelectorAll('.precio');
+  precios.forEach(p => {
+    const match = p.textContent.match(/US\$(\d+)/);
+    if (match) {
+      const usd = parseFloat(match[1]);
+      const ars = (usd * tasa).toFixed(0);
+      if (!p.dataset.original) {
+        p.dataset.original = p.innerHTML;
+      }
+      p.innerHTML = p.dataset.original + " (~AR$" + ars + ")";
+    }
+  });
+}
+</script>
+<div class="catalogo">
+<div class="producto" data-genero="hombre"><img src="https://tse3.mm.bing.net/th?id=OIP.1PUQuUDXfOY-yGMjckz0lgHaHa&amp;pid=Api"/><h2><h2>Club de Nuit Intense</h2><p class="precio">100ml - US$44</p></h2><p class="precio">Club de Nuit Intense</p><p>Fragancia amaderada con notas de piña, limón y abedul. Elegante, sofisticada y muy duradera. Ideal para la noche o eventos formales.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse3.mm.bing.net/th?id=OIP.0aHkQkUlNe-dkRFINJyx-wHaHa&amp;pid=Api"/><h2><h2>9PM</h2><p class="precio">100ml - US$44</p></h2><p class="precio">9PM</p><p>Dulce y cálida, mezcla de manzana, canela y vainilla. Aromática y envolvente, perfecta para citas o salidas nocturnas.</p></div>
+<div class="producto" data-genero="mujer"><img src="https://tse3.mm.bing.net/th?id=OIP.qImPani4-e38eoprhn40OgHaHa&amp;pid=Api"/><h2><h2>Yara Pink</h2><p class="precio">100ml - US$39</p></h2><p class="precio">Yara Pink</p><p>Floral y tropical, con coco, frutas exóticas y un fondo avainillado. Femenina, alegre y juvenil, ideal para el día a día.</p></div>
+<div class="producto" data-genero="mujer"><img src="https://tse2.mm.bing.net/th?id=OIP.gwqwog1BiIJngmmiPfHPYAHaHa&amp;pid=Api"/><h2><h2>Yara Moi</h2><p class="precio">100ml - US$39</p></h2><p class="precio">Yara Moi</p><p>Caramelo, jazmín y melocotón. Fragancia suave, dulce y femenina. Estilo elegante y encantador para ocasiones especiales.</p></div>
+<div class="producto" data-genero="mujer"><img src="https://tse1.mm.bing.net/th?id=OIP.mj1Uv-dLleRxErgwqb2l5QHaFj&amp;pid=Api"/><h2><h2>Yara Tous</h2><p class="precio">100ml - US$39</p></h2><p class="precio">Yara Tous</p><p>Tropical y juvenil, con mango, maracuyá y flores blancas. Moderna y chispeante, perfecta para climas cálidos.</p></div>
+<div class="producto" data-genero="mujer"><img src="https://tse3.mm.bing.net/th/id/OIP.601ZrF_5oNgzkO-xBu3UzgHaHc?pid=Api"/><h2><h2>Haya</h2><p class="precio">100ml - US$42</p></h2><p class="precio">Haya</p><p>Champaña, fresa y flores blancas. Dulce, vibrante y refinada. Estilo sofisticado, ideal para celebraciones.</p></div>
+<div class="producto" data-genero="mujer"><img src="https://tse2.mm.bing.net/th/id/OIP.9zYgSvEQTg9vnTy_rHylYAHaHa?pid=Api"/><h2><h2>Club De Nuit Woman</h2><p class="precio">100ml - US$50</p></h2><p class="precio">Club De Nuit Woman</p><p>Inspirada en Coco Mademoiselle. Cítricos, rosa, jazmín y pachulí. Clásica y seductora, perfecta para cualquier momento.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse3.mm.bing.net/th?id=OIP.USyuild3sLB6Oc-blIE9eAHaHV&amp;pid=Api"/><h2><h2>Honor and Glory</h2><p class="precio">100ml - US$41</p></h2><p class="precio">Honor and Glory</p><p>Piña caramelizada, crème brûlée y especias. Gourmand moderno, potente y muy original.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse1.mm.bing.net/th/id/OIP.hgYM0Kv79q6T7AQI_XhgvQHaHa?pid=Api"/><h2><h2>Oud for Glory</h2><p class="precio">100ml - US$39</p></h2><p class="precio">Oud for Glory</p><p>Intensa con oud, lavanda, nuez moscada y azafrán. Amaderada oriental, majestuosa y potente.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse2.mm.bing.net/th?id=OIP.-zw19AKqYZhLvoyaAc2IlQHaHa&amp;pid=Api"/><h2><h2>Asad (negro)</h2><p class="precio">100ml - US$44</p></h2><p class="precio">Asad (negro)</p><p>Oriental, con tabaco, vainilla y ámbar. Misteriosa y fuerte, ideal para quienes buscan un perfume dominante.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse4.mm.bing.net/th?id=OIP.PFWnzJdMStxjmCpJjIuNtAHaF2&amp;pid=Api"/><h2><h2>Mandarín Odyssey Sky</h2><p class="precio">100ml - US$60</p></h2><p class="precio">Mandarín Odyssey Sky</p><p>Mandarina, caramelo y maderas. Cítrica, dulce y moderna, con carácter masculino y fresco.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse4.mm.bing.net/th?id=OIP.xZyKtu_CiGlB15jzzLOqYQHaHa&amp;pid=Api"/><h2><h2>Bharara King</h2><p class="precio">100ml - US$85</p></h2><p class="precio">Bharara King</p><p>Cítrica y especiada, con un fondo dulce de vainilla. Refinada y versátil, buena para oficina o salidas.</p></div>
+<div class="producto" data-genero="mujer"><img src="https://tse3.mm.bing.net/th?id=OIP.F5pVhMtysLQPR317DaG4IwHaHa&amp;pid=Api"/><h2><h2>Amethyst</h2><p class="precio">100ml - US$37</p></h2><p class="precio">Amethyst</p><p>Rosa turca, jazmín, oud y vainilla. Intensa, floral oriental con estilo elegante y duradero.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse2.mm.bing.net/th?id=OIP.eJLeP1oOnHaYlU74l7wsKQHaHJ&amp;pid=Api"/><h2><h2>Asad Zanzibar</h2><p class="precio">100ml - US$37</p></h2><p class="precio">Asad Zanzibar</p><p>Exótica y tropical, con iris, coco y vainilla. Perfecta para verano o días cálidos. Suave y misteriosa.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse3.mm.bing.net/th/id/OIP.fkWMvOa-E28vR262Df6a7gAAAA?pid=Api"/><h2><h2>Asad Bourbon</h2><p class="precio">100ml - US$55</p></h2><p class="precio">Asad Bourbon</p><p>Lavanda, cacao y vainilla bourbon. Cálida y especiada, con un aire elegante y nocturno.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse1.mm.bing.net/th/id/OIP.QxWkPzWB8txlCtYvSfRESQHaHa?pid=Api"/><h2><h2>Amber Oud Gold Edition</h2><p class="precio">120ml - US$75</p></h2><p class="precio">Amber Oud Gold Edition</p><p>Notas verdes, ámbar, frutas dulces y vainilla. Muy lujosa, ideal para causar impresión.</p></div>
+<div class="producto" data-genero="hombre"><img src="https://tse1.mm.bing.net/th?id=OIP.9A4oXRSdHQw_maQV-xUk1gHaFN&amp;pid=Api"/><h2><h2>Khamrah</h2><p class="precio">100ml - US$37</p></h2><p class="precio">Khamrah</p><p>Dátiles, canela, tonka y vainilla. Fragancia cálida, intensa y especiada. Perfecta para invierno.</p></div>
+<div class="producto" data-genero="hombre"><h2>Khamrah Qahwa</h2><p class="precio">100ml - US$37</p></div>
+</div>
+</body>
+</html>
